@@ -85,7 +85,7 @@ func (self *Builder) Prepare(raws ...interface{}) (parms []string, param2 []stri
 	}
 
 	if self.config.InstanceName == "" {
-		self.config.InstanceName = fmt.Sprintf("packer-ibmcloud-%s", time.Now().Unix())
+		self.config.InstanceName = fmt.Sprintf("packer-ibmcloud-%v", time.Now().Unix())
 	}
 
 	if self.config.InstanceDomain == "" {

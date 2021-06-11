@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	log.Println("IBM Cloud Provider version", version.FormattedVersion, version.VersionPrerelease, version.GitCommit)
+	log.Println("IBM Cloud Provider version:", version.FormattedVersion(), version.VersionPrerelease, version.GitCommit)
 
 	pps := plugin.NewSet()
 	pps.RegisterBuilder(plugin.DEFAULT_NAME, new(ibmcloud.Builder))
