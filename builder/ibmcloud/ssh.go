@@ -3,7 +3,7 @@ package ibmcloud
 import (
 	"fmt"
 
-	"github.com/hashicorp/packer/helper/multistep"
+	"github.com/hashicorp/packer-plugin-sdk/multistep"
 	"golang.org/x/crypto/ssh"
 	//"code.google.com/p/go.crypto/ssh"
 )

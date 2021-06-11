@@ -12,9 +12,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/hashicorp/packer/common/uuid"
-	"github.com/hashicorp/packer/helper/multistep"
-	"github.com/hashicorp/packer/packer"
+	"github.com/hashicorp/packer-plugin-sdk/multistep"
+	"github.com/hashicorp/packer-plugin-sdk/packer"
+	"github.com/hashicorp/packer-plugin-sdk/uuid"
 	"golang.org/x/crypto/ssh"
 )
 

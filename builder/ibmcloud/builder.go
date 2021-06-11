@@ -8,23 +8,22 @@ import (
 	"log"
 	"time"
 
-  "github.com/hashicorp/hcl/v2/hcldec"
-	"github.com/hashicorp/packer/common"
-	"github.com/hashicorp/packer/hcl2template"
-	"github.com/hashicorp/packer/helper/communicator"
-	"github.com/hashicorp/packer/helper/config"
-	"github.com/hashicorp/packer/helper/multistep"
-	"github.com/hashicorp/packer/packer"
-	"github.com/hashicorp/packer/template/interpolate"
+	"github.com/hashicorp/hcl/v2/hcldec"
+	"github.com/hashicorp/packer-plugin-sdk/common"
+	"github.com/hashicorp/packer-plugin-sdk/communicator"
+	"github.com/hashicorp/packer-plugin-sdk/multistep"
+	"github.com/hashicorp/packer-plugin-sdk/multistep/commonsteps"
+	"github.com/hashicorp/packer-plugin-sdk/packer"
+	"github.com/hashicorp/packer-plugin-sdk/template/config"
+	"github.com/hashicorp/packer-plugin-sdk/template/interpolate"
 )
 
-// The unique ID for this builder.
 const BuilderId = "packer.ibmcloud"
 
 type Config struct {
-	common.PackerConfig             `mapstructure:",squash"`
-	Comm                            communicator.Config `mapstructure:",squash"`
-	hcl2template.KeyValueFilter `mapstructure:",squash"`
+	common.PackerConfig   `mapstructure:",squash"`
+	Comm                  communicator.Config `mapstructure:",squash"`
+	config.KeyValueFilter `mapstructure:",squash"`
 
 	Username            string   `mapstructure:"username"`
 	APIKey              string   `mapstructure:"api_key"`
@@ -71,9 +70,9 @@ func (self *Builder) ConfigSpec() hcldec.ObjectSpec {
 // Prepare processes the build configuration parameters.
 func (self *Builder) Prepare(raws ...interface{}) (parms []string, param2 []string, retErr error) {
 	err := config.Decode(&self.config, &config.DecodeOpts{
-			Interpolate:        true,
-			InterpolateContext: &self.config.ctx,
-			InterpolateFilter: &interpolate.RenderFilter{ },
+		Interpolate:        true,
+		InterpolateContext: &self.config.ctx,
+		InterpolateFilter:  &interpolate.RenderFilter{},
 	}, raws...)
 
 	if err != nil {
@@ -218,7 +217,7 @@ func (self *Builder) Run(ctx context.Context, ui packer.Ui, hook packer.Hook) (p
 				WinRMConfig: winRMConfig,
 			},
 			new(stepWaitforInstance),
-			new(common.StepProvision),
+			new(commonsteps.StepProvision),
 			new(stepCaptureImage),
 		}
 	} else if self.config.Comm.Type == "ssh" {
@@ -234,7 +233,7 @@ func (self *Builder) Run(ctx context.Context, ui packer.Ui, hook packer.Hook) (p
 				Host:      sshCommHost,
 				SSHConfig: sshConfig,
 			},
-			new(common.StepProvision),
+			new(commonsteps.StepProvision),
 			new(stepCaptureImage),
 		}
 	}

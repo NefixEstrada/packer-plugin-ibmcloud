@@ -3,9 +3,9 @@ package ibmcloud
 import (
 	"fmt"
 
-	"github.com/hashicorp/packer/helper/communicator"
-	"github.com/hashicorp/packer/helper/multistep"
-	"github.com/hashicorp/packer/packer"
+	"github.com/hashicorp/packer-plugin-sdk/communicator"
+	"github.com/hashicorp/packer-plugin-sdk/multistep"
+	"github.com/hashicorp/packer-plugin-sdk/packer"
 )
 
 func winRMConfig(state multistep.StateBag) (*communicator.WinRMConfig, error) {

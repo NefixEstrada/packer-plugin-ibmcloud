@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hashicorp/packer/helper/multistep"
+	"github.com/hashicorp/packer-plugin-sdk/multistep"
 )
 
 const SOFTLAYER_API_URL = "api.softlayer.com/rest/v3"
