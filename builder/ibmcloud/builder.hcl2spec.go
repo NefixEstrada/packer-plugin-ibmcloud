@@ -91,7 +91,6 @@ type FlatConfig struct {
 	ProvisioningSshKeyId           *int64                `mapstructure:"provisioning_ssh_key_id" cty:"provisioning_ssh_key_id" hcl:"provisioning_ssh_key_id"`
 	InstancePublicSecurityGroupIds []int64               `mapstructure:"public_security_groups" cty:"public_security_groups" hcl:"public_security_groups"`
 	RawStateTimeout                *string               `mapstructure:"instance_state_timeout" cty:"instance_state_timeout" hcl:"instance_state_timeout"`
-	StateTimeout                   *string               `cty:"state_timeout" hcl:"state_timeout"`
 }
 
 // FlatMapstructure returns a new FlatConfig.
@@ -186,7 +185,6 @@ func (*FlatConfig) HCL2Spec() map[string]hcldec.Spec {
 		"provisioning_ssh_key_id":      &hcldec.AttrSpec{Name: "provisioning_ssh_key_id", Type: cty.Number, Required: false},
 		"public_security_groups":       &hcldec.AttrSpec{Name: "public_security_groups", Type: cty.List(cty.Number), Required: false},
 		"instance_state_timeout":       &hcldec.AttrSpec{Name: "instance_state_timeout", Type: cty.String, Required: false},
-		"state_timeout":                &hcldec.AttrSpec{Name: "state_timeout", Type: cty.String, Required: false},
 	}
 	return s
 }

@@ -48,7 +48,7 @@ type Config struct {
 	InstancePublicSecurityGroupIds []int64 `mapstructure:"public_security_groups"`
 
 	RawStateTimeout string `mapstructure:"instance_state_timeout"`
-	StateTimeout    time.Duration
+	stateTimeout    time.Duration
 
 	ctx interpolate.Context
 }
@@ -178,7 +178,7 @@ func (self *Builder) Prepare(raws ...interface{}) (parms []string, param2 []stri
 		errs = packer.MultiErrorAppend(
 			errs, fmt.Errorf("Failed parsing state_timeout: %s", err))
 	}
-	self.config.StateTimeout = stateTimeout
+	self.config.stateTimeout = stateTimeout
 
 	//log.Println(common.ScrubConfig(self.config, self.config.APIKey, self.config.Username))
 

@@ -18,7 +18,7 @@ func (self *stepWaitforInstance) Run(_ context.Context, state multistep.StateBag
 	ui.Say("Waiting for the instance to become ACTIVE...")
 
 	instance := state.Get("instance_data").(map[string]interface{})
-	err := client.waitForInstanceReady(instance["globalIdentifier"].(string), config.StateTimeout)
+	err := client.waitForInstanceReady(instance["globalIdentifier"].(string), config.stateTimeout)
 	if err != nil {
 		err := fmt.Errorf("Error waiting for instance to become ACTIVE: %s", err)
 		state.Put("error", err)

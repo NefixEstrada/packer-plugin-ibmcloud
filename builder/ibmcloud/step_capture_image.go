@@ -69,7 +69,7 @@ func (self *stepCaptureImage) Run(_ context.Context, state multistep.StateBag) m
 
 	// We are waiting for the instance since the waiting process checks for active transactions.
 	// The image will be ready when no active transactions will be set for the snapshotted instance.
-	err := client.waitForInstanceReady(instanceId, config.StateTimeout)
+	err := client.waitForInstanceReady(instanceId, config.stateTimeout)
 	if err != nil {
 		err := fmt.Errorf("Error waiting for instance to become ACTIVE again after image creation call. Error: %s", err)
 		ui.Error(err.Error())

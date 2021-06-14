@@ -74,7 +74,7 @@ func (self *stepCreateInstance) Cleanup(state multistep.StateBag) {
 
 	// We should wait until the instance is up/have no transactions,
 	// since if the instance will have some assigned transactions the destroy API call will fail
-	err := client.waitForInstanceReady(self.instanceId, config.StateTimeout)
+	err := client.waitForInstanceReady(self.instanceId, config.stateTimeout)
 	if err != nil {
 		log.Printf("Error destroying instance: %v", err.Error())
 		ui.Error(fmt.Sprintf("Error waiting for instance to become ACTIVE for instance (%s)", self.instanceId))
